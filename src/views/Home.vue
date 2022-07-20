@@ -220,7 +220,7 @@ export default {
     }
   },
   mounted () {
-     this.axios.get('https://enigmatic-stream-43395.herokuapp.com/posts')
+    this.axios.get('https://enigmatic-stream-43395.herokuapp.com/posts')
       .then(res => {
         console.log(res)
         this.miners = res.data.post

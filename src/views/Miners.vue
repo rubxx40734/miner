@@ -40,45 +40,45 @@
             <td><button type="button" class="btn btn-danger" @click="deleteMiner(item._id)">刪除</button></td>
           </tr>
       </tbody>
-</table> 
+</table>
   </div>
 </template>
 
 <script>
 import AddminerVue from '../components/Addminer.vue'
 export default {
-    data() {
-        return {
-           miners: []
-        }
-    },
-    components: {
-        AddminerVue
-    },
-    methods: {
-       init() {
-         const token = window.localStorage.getItem('userToken')
-         this.axios.defaults.headers.common.Authorization = `Bearer ${token}`
-         this.axios.get('https://enigmatic-stream-43395.herokuapp.com/posts')
-          .then(res => {
-            console.log(res)
-            this.miners = res.data.post
-          })
-       },
-       deleteMiner(id){
-        this.axios.delete(`https://enigmatic-stream-43395.herokuapp.com/posts/post/${id}`)
-         .then(res => {
-            console.log(res)
-            this.init()
-         })
-        console.log(id)
-       },
-       addminer() {
-        this.$refs.modal.showModal()
-       }
-    },
-    mounted() {
-        this.init()
+  data () {
+    return {
+      miners: []
     }
+  },
+  components: {
+    AddminerVue
+  },
+  methods: {
+    init () {
+      const token = window.localStorage.getItem('userToken')
+      this.axios.defaults.headers.common.Authorization = `Bearer ${token}`
+      this.axios.get('https://enigmatic-stream-43395.herokuapp.com/posts')
+        .then(res => {
+          console.log(res)
+          this.miners = res.data.post
+        })
+    },
+    deleteMiner (id) {
+      this.axios.delete(`https://enigmatic-stream-43395.herokuapp.com/posts/post/${id}`)
+        .then(res => {
+          console.log(res)
+          this.init()
+        })
+      console.log(id)
+    },
+    addminer () {
+      this.$refs.modal.showModal()
+    }
+  },
+  mounted () {
+    this.init()
+  }
 }
 </script>

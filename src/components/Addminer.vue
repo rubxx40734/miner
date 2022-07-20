@@ -57,41 +57,41 @@
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 export default {
-    data() {
-        return {
-            modal: {},
-            data: {
-                content: "",
-                contentUrl: "",
-                coin: "",
-                coinHref: "",
-                coinImgUrl: "",
-                fees: "",
-                age: '',
-                daily: '',
-                risk: ""
-            }
-        }
-    },
-    methods: {
-      showModal () {
-        this.modal.show()
-     },
-      hideModal () {
-        this.modal.hide()
-     },
-     sendMiner() {
-        this.axios.post('https://enigmatic-stream-43395.herokuapp.com/posts',this.data)
-         .then(res => {
-            console.log(res)
-            this.data = {}
-            this.hideModal()
-            this.$emit('emit-update')
-         })
-     }
-    },
-    mounted() {
-       this.modal = new Modal(this.$refs.modal)
+  data () {
+    return {
+      modal: {},
+      data: {
+        content: '',
+        contentUrl: '',
+        coin: '',
+        coinHref: '',
+        coinImgUrl: '',
+        fees: '',
+        age: '',
+        daily: '',
+        risk: ''
+      }
     }
+  },
+  methods: {
+    showModal () {
+      this.modal.show()
+    },
+    hideModal () {
+      this.modal.hide()
+    },
+    sendMiner () {
+      this.axios.post('https://enigmatic-stream-43395.herokuapp.com/posts', this.data)
+        .then(res => {
+          console.log(res)
+          this.data = {}
+          this.hideModal()
+          this.$emit('emit-update')
+        })
+    }
+  },
+  mounted () {
+    this.modal = new Modal(this.$refs.modal)
+  }
 }
 </script>

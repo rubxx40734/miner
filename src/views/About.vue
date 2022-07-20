@@ -46,32 +46,31 @@
 </style>
 <script>
 export default {
-  data() {
-     return {
-        user: {
-          email:'',
-          password: ''
-        }
-     }
+  data () {
+    return {
+      user: {
+        email: '',
+        password: ''
+      }
+    }
   },
   methods: {
-     login () {
-        const url = 'https://enigmatic-stream-43395.herokuapp.com/users/sign_in'
-        this.axios.post(url, this.user)
-         .then(res => {
+    login () {
+      const url = 'https://enigmatic-stream-43395.herokuapp.com/users/sign_in'
+      this.axios.post(url, this.user)
+        .then(res => {
           console.log(res)
           const token = res.data.user.token
           console.log(token)
-           window.localStorage.setItem('userToken', token)
-           this.$router.push('/miners')
-         })
-         .catch(err => {
+          window.localStorage.setItem('userToken', token)
+          this.$router.push('/miners')
+        })
+        .catch(err => {
           console.log(err)
-         })
-        
-     }
+        })
+    }
   },
-  mounted() {
+  mounted () {
     // console.log(this.axios)
   }
 }
