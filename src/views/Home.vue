@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav bg-dark">
     <div class="container">
       <div class="row">
         <div class="col-md-2">
@@ -42,7 +42,6 @@
 <style lang="scss">
 .nav{
   height: 100px;
-  background-image: url('../assets/bg.jpg');
 }
 .icon{
   width: 30px;
