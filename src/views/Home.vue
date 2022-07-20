@@ -42,7 +42,7 @@
 <style lang="scss">
 .nav{
   height: 100px;
-  background-image: url(https://media.istockphoto.com/photos/sky-full-of-stars-picture-id512250305?b=1&k=20&m=512250305&s=170667a&w=0&h=x_Y7xuAMU6llJlKGm7dXDZsCitof4mYGH0YmUasFha8=);
+  background-image: url('../assets/bg.jpg');
 }
 .icon{
   width: 30px;
