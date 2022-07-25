@@ -1,5 +1,5 @@
 <template>
-    <div class="nav">
+    <div class="nav bg-dark">
     <div class="container">
       <div class="row">
         <div class="col-md-2">
@@ -37,19 +37,76 @@
             <td class="text-warning">{{item.age}}d</td>
             <td class="text-danger">{{item.daily}}%</td>
             <td>{{item.risk}}</td>
+            <td><button type="button" class="btn btn-warning" @click="putminer(item._id,item)">編輯</button></td>
             <td><button type="button" class="btn btn-danger" @click="deleteMiner(item._id)">刪除</button></td>
           </tr>
       </tbody>
 </table>
   </div>
+   <div class="modal" tabindex="-1" ref="delmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title bg-light">修改資料</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">miner</span>
+            <input type="text" class="form-control" placeholder="miner" v-model="tempminer.content">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">minerUrl</span>
+            <input type="text" class="form-control" placeholder="minerUrl" v-model="tempminer.contentUrl">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">coin</span>
+            <input type="text" class="form-control" placeholder="coin" v-model="tempminer.coin">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">coinHref</span>
+            <input type="text" class="form-control" placeholder="coinHref" v-model="tempminer.coinHref">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">coinImgUrl</span>
+            <input type="text" class="form-control" placeholder="coinImgUrl" v-model="tempminer.coinImgUrl">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">fees</span>
+            <input type="text" class="form-control" placeholder="fees" v-model="tempminer.fees">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">age</span>
+            <input type="text" class="form-control" placeholder="age" v-model="tempminer.age">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">daily</span>
+            <input type="text" class="form-control" placeholder="daily" v-model="tempminer.daily">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">risk</span>
+            <input type="text" class="form-control" placeholder="risk" v-model="tempminer.risk">
+         </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" @click="editMiner(tempminer._id)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import AddminerVue from '../components/Addminer.vue'
+import Modal from 'bootstrap/js/dist/modal'
 export default {
   data () {
     return {
-      miners: []
+      miners: [],
+      tempminer: {},
+      delmodal: {}
     }
   },
   components: {
@@ -75,9 +132,28 @@ export default {
     },
     addminer () {
       this.$refs.modal.showModal()
+    },
+    putminer (id, item) {
+      console.log(id, item.content)
+      this.tempminer = { ...item }
+      this.delmodal.show()
+    },
+    editMiner (id) {
+      console.log(id)
+      const url = `https://enigmatic-stream-43395.herokuapp.com/posts/${id}`
+      this.axios.patch(url, this.tempminer)
+        .then(res => {
+          console.log(res)
+          this.delmodal.hide()
+          this.init()
+        })
+        .then(err => {
+          console.log(err)
+        })
     }
   },
   mounted () {
+    this.delmodal = new Modal(this.$refs.delmodal)
     this.init()
   }
 }

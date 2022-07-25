@@ -1,5 +1,5 @@
 <template>
-  <div class="nav bg-dark">
+  <div class="nav bg-success">
     <div class="container">
       <div class="row">
         <div class="col-md-2">
