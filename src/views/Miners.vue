@@ -1,5 +1,5 @@
 <template>
-    <div class="nav bg-dark">
+    <div class="nav bg-setting">
     <div class="container">
       <div class="row">
         <div class="col-md-2">
@@ -23,6 +23,7 @@
               <button type="button" class="btn btn-sm  btn-light mb-1" ></button>
               <button type="button" class="btn btn-sm btn-light"></button>
             </div>Age</th>
+            <th scope="col">LaunchDate</th>
             <th scope="col">Daily ROI</th>
             <th scope="col">Risk Warning</th>
             <th scope="col">操作</th>
@@ -34,7 +35,8 @@
             <th scope="row"><a :href="item.contentUrl" target="_blank">{{item.content}}</a></th>
             <td class=""><a :href="item.coinHref" target="_blank"><img :src="item.coinImgUrl" alt="" class="icon me-2"></a>{{item.coin}}</td>
             <td class="text-success">{{item.fees}}</td>
-            <td class="text-warning">{{item.age}}d</td>
+            <td class="text-warning">{{totalday(item.age)}}d</td>
+            <td class="text-success">{{item.LaunchDate}}</td>
             <td class="text-danger">{{item.daily}}%</td>
             <td>{{item.risk}}</td>
             <td><button type="button" class="btn btn-warning" @click="putminer(item._id,item)">編輯</button></td>
@@ -77,7 +79,11 @@
          </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">age</span>
-            <input type="text" class="form-control" placeholder="age" v-model="tempminer.age">
+            <input type="date" class="form-control" placeholder="age" v-model="tempminer.age">
+         </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">LaunchDate</span>
+            <input type="date" class="form-control" placeholder="LaunchDate" v-model="tempminer.LaunchDate">
          </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">daily</span>
@@ -87,7 +93,6 @@
             <span class="input-group-text" id="basic-addon1">risk</span>
             <input type="text" class="form-control" placeholder="risk" v-model="tempminer.risk">
          </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -98,6 +103,11 @@
 </div>
 </template>
 
+<style lang="scss">
+.bg-setting{
+  background-image: url('../assets/bg.jpg');
+}
+</style>
 <script>
 import AddminerVue from '../components/Addminer.vue'
 import Modal from 'bootstrap/js/dist/modal'
@@ -150,6 +160,20 @@ export default {
         .then(err => {
           console.log(err)
         })
+    },
+    totalday (oldtime) {
+      const newtime = Date.now()
+      const minerday = new Date(oldtime)
+      console.log('newtime', newtime, 'minerday', minerday)
+      if (minerday > newtime) {
+        var subiDays = parseInt(Math.abs(minerday - newtime) / 1000 / 60 / 60 / 24)
+        console.log(subiDays) // 把相差的毫秒數轉換為天數
+        return `coming soon ${subiDays}`
+      } else {
+        var iDays = parseInt(Math.abs(minerday - newtime) / 1000 / 60 / 60 / 24)
+        console.log(iDays) // 把相差的毫秒數轉換為天數
+        return iDays
+      }
     }
   },
   mounted () {

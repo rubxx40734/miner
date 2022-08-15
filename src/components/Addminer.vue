@@ -33,8 +33,12 @@
          </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">age</span>
-            <input type="text" class="form-control" placeholder="age" v-model="data.age">
+            <input type="date" class="form-control" placeholder="age" v-model="data.age">
          </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">LaunchDate</span>
+            <input type="date" class="form-control" placeholder="LaunchDate" v-model="data.LaunchDate">
+        </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">daily</span>
             <input type="text" class="form-control" placeholder="daily" v-model="data.daily">
@@ -43,7 +47,6 @@
             <span class="input-group-text" id="basic-addon1">risk</span>
             <input type="text" class="form-control" placeholder="risk" v-model="data.risk">
          </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -69,7 +72,8 @@ export default {
         fees: '',
         age: '',
         daily: '',
-        risk: ''
+        risk: '',
+        LaunchDate: ''
       }
     }
   },

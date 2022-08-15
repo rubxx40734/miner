@@ -1,5 +1,5 @@
 <template>
-  <div class="nav bg-dark">
+  <div class="nav bg-setting">
     <div class="container">
       <div class="row">
         <div class="col-md-2">
@@ -36,7 +36,9 @@
 </template>
 
 <style lang="scss">
-
+.bg-setting{
+  background-image: url('../assets/bg.jpg');
+}
 .form-signin {
   width: 100%;
   max-width: 330px;
