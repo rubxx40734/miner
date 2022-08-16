@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     login () {
-      const url = 'https://enigmatic-stream-43395.herokuapp.com/users/sign_in'
+      const url = `${process.env.VUE_APP_API}users/sign_in`
       this.axios.post(url, this.user)
         .then(res => {
           console.log(res)

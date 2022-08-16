@@ -85,7 +85,7 @@ export default {
       this.modal.hide()
     },
     sendMiner () {
-      this.axios.post('https://enigmatic-stream-43395.herokuapp.com/posts', this.data)
+      this.axios.post(`${process.env.VUE_APP_API}posts`, this.data)
         .then(res => {
           console.log(res)
           this.data = {}

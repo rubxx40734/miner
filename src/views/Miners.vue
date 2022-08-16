@@ -126,14 +126,14 @@ export default {
     init () {
       const token = window.localStorage.getItem('userToken')
       this.axios.defaults.headers.common.Authorization = `Bearer ${token}`
-      this.axios.get('https://enigmatic-stream-43395.herokuapp.com/posts')
+      this.axios.get(`${process.env.VUE_APP_API}posts`)
         .then(res => {
           console.log(res)
           this.miners = res.data.post
         })
     },
     deleteMiner (id) {
-      this.axios.delete(`https://enigmatic-stream-43395.herokuapp.com/posts/post/${id}`)
+      this.axios.delete(`${process.env.VUE_APP_API}posts/post/${id}`)
         .then(res => {
           console.log(res)
           this.init()
@@ -150,7 +150,7 @@ export default {
     },
     editMiner (id) {
       console.log(id)
-      const url = `https://enigmatic-stream-43395.herokuapp.com/posts/${id}`
+      const url = `${process.env.VUE_APP_API}posts/${id}`
       this.axios.patch(url, this.tempminer)
         .then(res => {
           console.log(res)

@@ -318,11 +318,14 @@ export default {
     }
   },
   mounted () {
-    this.axios.get('https://enigmatic-stream-43395.herokuapp.com/posts')
+    this.axios.get(`${process.env.VUE_APP_API}posts`)
       .then(res => {
         console.log(res)
         this.miners = res.data.post
         console.log(this.miners)
+      })
+      .catch(err => {
+        console.log(err)
       })
   }
 }
